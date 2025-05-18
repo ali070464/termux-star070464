@@ -36,7 +36,7 @@ jobs:
           apktool b decoded_star -o star.apk
 
       - name: Upload built APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@7a2ebf2d947db9e6b14d26f477c415c4a7252e4d
         with:
           name: star.apk
           path: star.apk
