@@ -3,7 +3,7 @@ name: Build Termux Mod (Star Project)
 on:
   push:
     branches: [main]
-# Force re-run
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
           apktool b decoded_star -o star.apk
 
       - name: Upload built APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: star.apk
           path: star.apk
