@@ -1,0 +1,36 @@
+
+name: Build Termux Mod (Star Project)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Download Apktool
+        run: |
+          wget -q https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.3.jar -O apktool.jar
+          echo -e '#!/bin/sh\njava -jar $(dirname $0)/apktool.jar "$@"' > apktool
+          chmod +x apktool
+
+      - name: Build APK
+        run: |
+          mkdir build_output
+          ./apktool b decoded_star -o build_output/star_modified.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: star_modified
+          path: build_output/star_modified.apk
