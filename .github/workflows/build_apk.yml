@@ -3,7 +3,7 @@ name: Build Termux Mod (Star Project)
 on:
   push:
     branches: [main]
-
+# Force re-run
 jobs:
   build:
     runs-on: ubuntu-latest
