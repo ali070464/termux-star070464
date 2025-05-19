@@ -31,9 +31,12 @@ jobs:
           sudo mv apktool /usr/local/bin/
           sudo mv apktool.jar /usr/local/bin/
 
+      - name: Check decoded_star contents
+        run: ls -la decoded_star
+
       - name: Rebuild APK
         run: |
-          apktool b decoded_star -o star.apk
+          apktool b decoded_star -o star.apk || (echo "APKTool Failed!" && exit 1)
 
       - name: Upload built APK
         uses: actions/upload-artifact@v2
